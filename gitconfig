@@ -1,0 +1,12 @@
+[core]
+	editor = atom --wait
+	excludesfile = ~/.gitignore
+	hooksPath = /Users/cole/.git/hooks
+[user]
+	name = Cole Eason
+	email = cole@expensify.com
+	signingkey = 88F8F06DD13BA073
+[push]
+	default = current
+[commit]
+    gpgsign = true

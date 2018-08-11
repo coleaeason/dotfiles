@@ -1,0 +1,6 @@
+# fabric auto complete
+.fab_tasks~
+/fabric-completion/*
+
+# Ignore aws creds
+.aws/*

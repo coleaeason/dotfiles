@@ -1,0 +1,14 @@
+syntax on
+set hlsearch
+set autoindent
+set expandtab
+set shiftwidth=4
+set smarttab
+set tabstop=4
+set smartcase
+set ignorecase
+set linebreak
+set wrap
+set cursorline
+set number
+set backspace=indent,eol,start

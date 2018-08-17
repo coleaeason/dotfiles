@@ -1,7 +1,7 @@
 [core]
-	editor = atom --wait
+	editor = vim
 	excludesfile = ~/.gitignore
-	hooksPath = /Users/cole/.git/hooks
+	hooksPath = ~/.git/hooks
 [user]
 	name = Cole Eason
 	email = cole@expensify.com
@@ -10,3 +10,5 @@
 	default = current
 [commit]
     gpgsign = true
+[gpg]
+	program = gpg2

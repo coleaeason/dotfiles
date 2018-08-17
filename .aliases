@@ -1,0 +1,20 @@
+alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
+alias pfab='fab -P -z 10'
+alias gab='fab -g bastion1.sc'
+alias pgab='gab -P -z 10'
+alias gm='git pull origin master'
+alias gco='git checkout'
+alias gcom='git checkout master'
+alias gcob='git checkout -b'
+alias gcm='git commit -m'
+alias gaa='git add .'
+alias gau='git add -u'
+alias gs='git status'
+alias gp='git push origin'
+alias sshtun='ssh -At -t bastion1.sc ssh -A'
+
+function pr(){
+    remote=`git remote -v | grep origin | head -1 | awk '{print $2'} | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//'`
+    branch=`git rev-parse --abbrev-ref HEAD`
+    open "https://github.com/$remote/compare/${1:-master}...$branch?expand=1"
+}

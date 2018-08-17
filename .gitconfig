@@ -1,14 +1,14 @@
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore
-	hooksPath = ~/.git/hooks
+    editor = vim
+    excludesfile = ~/.gitignore
+    hooksPath = ~/.git/hooks
 [user]
-	name = Cole Eason
-	email = cole@expensify.com
-	signingkey = 88F8F06DD13BA073
+    name = Cole Eason
+    email = cole@expensify.com
+    signingkey = 88F8F06DD13BA073
 [push]
-	default = current
+    default = current
 [commit]
     gpgsign = true
 [gpg]
-	program = gpg2
+    program = gpg2

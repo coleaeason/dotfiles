@@ -4,6 +4,9 @@ ssh-add ~/.ssh/expensify > /dev/null 2>&1
 # Set PATH
 export PATH=$PATH:$HOME/go/bin
 
+# Set CXX Variables
+export CXXFLAGS="-std=gnu++14 -Wall -Werror"
+
 #Aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases

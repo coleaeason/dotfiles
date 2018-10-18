@@ -2,7 +2,7 @@
 
 DIR="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-for item in $(ls -d .??*); do
+for item in $(ls -d .??* | grep -v -x .git); do
     ln -snf $DIR/$item ~
 done
 

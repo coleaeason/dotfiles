@@ -1,6 +1,11 @@
 #Add key
 ssh-add ~/.ssh/expensify > /dev/null 2>&1
 
+# load secrets if any
+if [ -f ~/.secrets ]; then
+    source ~/.secrets
+fi
+
 # Set PATH
 export PATH=$PATH:$HOME/go/bin
 

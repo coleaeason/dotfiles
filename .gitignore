@@ -4,3 +4,9 @@
 
 # Ignore aws creds
 .aws/*
+
+#ignore generic secrets file
+.secrets
+
+# mac trash
+.DS_STORE

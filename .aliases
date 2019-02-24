@@ -1,7 +1,11 @@
+# Expensify aliases
 alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
 alias pfab='fab -P -z 10'
-alias gab='fab -g bastion1.sc'
+alias gab='fab -g bastion1.sjc'
 alias pgab='gab -P -z 10'
+alias sshtun='ssh -At -t bastion1.sjc ssh -A'
+
+# Git aliases
 alias gm='git pull origin master'
 alias gco='git checkout'
 alias gcom='git checkout master'
@@ -11,7 +15,10 @@ alias gaa='git add .'
 alias gau='git add -u'
 alias gs='git status'
 alias gp='git push origin'
-alias sshtun='ssh -At -t bastion1.sc ssh -A'
+
+# Bash things
+alias ..='cd ..'
+alias ...='cd ../..'
 
 function pr(){
     remote=`git remote -v | grep origin | head -1 | awk '{print $2'} | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//'`

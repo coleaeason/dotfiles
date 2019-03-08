@@ -5,7 +5,7 @@
 [user]
     name = Cole Eason
     email = cole@expensify.com
-    signingkey = 88F8F06DD13BA073
+    signingkey = 88F8F06DD13BA073!
 [push]
     default = current
 [commit]

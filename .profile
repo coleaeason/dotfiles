@@ -83,7 +83,7 @@ function color_my_prompt {
     elif [[ -f /etc/vagrantbox ]]; then
         local host="\[\033[01;32m\]\h"
     else
-        local host="\[\033[01;93m\]\h"
+        local host="\[\033[01;93m\]\H"
     fi
     local dircolor="\[\033[01;34m\]"
     local separatorcolor="\[\033[00;32m\]"

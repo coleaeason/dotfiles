@@ -12,6 +12,9 @@ export PATH=$PATH:$HOME/go/bin
 # Set CXX Variables
 export CXXFLAGS="-std=gnu++14 -Wall -Werror"
 
+# Set colors to always be like linux
+export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+
 #Aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases

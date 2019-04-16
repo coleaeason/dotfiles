@@ -26,3 +26,8 @@ function pr(){
     branch=`git rev-parse --abbrev-ref HEAD`
     open "https://github.com/$remote/compare/${1:-master}...$branch?expand=1"
 }
+
+# create a socks proxy on port 8080 to a given host, use compression for the data.
+function socks(){
+    ssh -D 8080 -C $1
+}

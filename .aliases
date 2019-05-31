@@ -4,6 +4,7 @@ alias pfab='fab -P -z 10'
 alias gab='fab -g bastion1.sjc'
 alias pgab='gab -P -z 10'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
+alias fhk='~/fuckHostKeys.sh'
 
 # Git aliases
 alias gm='git pull origin master'

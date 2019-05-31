@@ -10,3 +10,6 @@
 
 # mac trash
 .DS_STORE
+
+# vscode trash
+.vscode

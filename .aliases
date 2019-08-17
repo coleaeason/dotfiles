@@ -32,3 +32,8 @@ function pr(){
 function socks(){
     ssh -D 8080 -C $1
 }
+
+# get info from a cert quickly
+certinfo() {
+    openssl x509 -in $1 -noout -text
+}

@@ -97,3 +97,6 @@ function color_my_prompt {
     export PS1="${PYTHON_VIRTUALENV}$host$separatorcolor->$dircolor$twolastdirs $branch_color$git_branch$separatorcolor$prompt_symbol$last_color "
 }
 PROMPT_COMMAND=color_my_prompt
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+

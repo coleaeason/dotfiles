@@ -5,17 +5,22 @@ alias gab='fab -g bastion1.sjc'
 alias pgab='gab -P -z 10'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias fhk='~/fuckHostKeys.sh'
+alias misc='cd ~/source/Expensify/misc-scripts/; source venv/bin/activate'
 
 # Git aliases
 alias gm='git pull origin master'
 alias gco='git checkout'
 alias gcom='git checkout master'
 alias gcob='git checkout -b'
+alias gcbo='gcob'
 alias gcm='git commit -m'
+alias gcnm='git commit -n -m'
+alias gcmn='gcnm'
 alias gaa='git add .'
 alias gau='git add -u'
 alias gs='git status'
 alias gp='git push origin'
+alias gpn='git push origin --no-verify'
 
 # Bash things
 alias ..='cd ..'

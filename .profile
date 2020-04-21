@@ -1,5 +1,4 @@
 #Add key
-ssh-add ~/.ssh/expensify > /dev/null 2>&1
 
 # load secrets if any
 if [ -f ~/.secrets ]; then

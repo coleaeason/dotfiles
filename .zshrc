@@ -1,5 +1,4 @@
 #Add key
-ssh-add ~/.ssh/expensify > /dev/null 2>&1
 
 # load secrets if any
 if [ -f ~/.secrets ]; then
@@ -67,19 +66,26 @@ function get_branch_color {
     fi
 }
 
-autoload -Uz vcs_info 
-autoload -U compinit && compinit
-precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats '(%b) '
+# Disable default venv PS1
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Determine active Python virtualenv details.
 function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
       echo ""
   else
-      echo "%F{2}(`basename \"$VIRTUAL_ENV\"`)%f "
+      echo "🐍%F{2}(`basename \"$VIRTUAL_ENV\"`)%f "
   fi
 }
+
+autoload -Uz vcs_info 
+autoload -U compinit && compinit
+precmd() { 
+	vcs_info
+	branch_color=$(get_branch_color)
+	PYTHON_VIRTUALENV=$(set_virtualenv)
+ }
+zstyle ':vcs_info:git:*' formats '(%b) '
 
 # %B starts bold
 # %b stops bold
@@ -87,12 +93,6 @@ function set_virtualenv () {
 # %f stops color
 # %m for short hostname
 # %2d for last 2 dirs
-
-# get branch color
-branch_color=$(get_branch_color)
-
-# set env coloring
-PYTHON_VIRTUALENV=$(set_virtualenv)
 
 PROMPT='${PYTHON_VIRTUALENV}%B%F{14}%m%f%b%F{2}->%f%B%F{4}%2d%f%b %B${branch_color}${vcs_info_msg_0_}%f%b%F{2}>%f '
 # test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

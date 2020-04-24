@@ -11,8 +11,9 @@ Vagrant.configure('2') do |config|
     config.vm.provision "file", source: "~/.gdbinit", destination: "~/.gdbinit", run: "always"
     config.vm.provision "shell", inline: "touch /etc/vagrantbox", run: "always"
     config.vm.provision "shell", inline: 'grep -q -e "^StreamLocalBindUnlink yes$" /etc/ssh/sshd_config || echo "StreamLocalBindUnlink yes" | sudo tee -a /etc/ssh/sshd_config', run: "always"
-    config.vm.provision "shell", inline: "if [[ -e `which apt-get` ]]; then apt-get -qq install gnupg2; fi"
+    config.vm.provision "shell", inline: "if [[ -e `which apt-get` ]]; then export DEBIAN_FRONTEND=noninteractive; apt-get -qq install gnupg2; fi"
     
     # forward gpg keys
+	config.vm.provision "file", source:"~/.gnupg/pubring.gpg", destination: "~/.gnupg/pubring.kbx", run: "always"
     config.ssh.extra_args = [ "-o", "RemoteForward /home/vagrant/.gnupg/S.gpg-agent /Users/cole/.gnupg/S.gpg-agent.extra" ]
 end

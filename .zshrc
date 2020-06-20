@@ -6,7 +6,7 @@ if [ -f ~/.secrets ]; then
 fi
 
 # Set PATH
-export PATH=$PATH:$HOME/go/bin
+export PATH="/usr/local/sbin:/usr/local/opt/terraform@0.11/bin:$PATH"
 
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
@@ -97,5 +97,6 @@ zstyle ':vcs_info:git:*' formats '(%b) '
 PROMPT='${PYTHON_VIRTUALENV}%B%F{14}%m%f%b%F{2}->%f%B%F{4}%2d%f%b %B${branch_color}${vcs_info_msg_0_}%f%b%F{2}>%f '
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
-eval "$(rbenv init -)"
+if `which rbenv > /dev/null`; then
+	eval "$(rbenv init -)"
+fi

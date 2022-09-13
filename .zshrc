@@ -6,7 +6,7 @@ if [ -f ~/.secrets ]; then
 fi
 
 # Set PATH
-export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH"
+export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH:$(go env GOPATH)/bin"
 
 # Pyenv garbage
 export PYENV_ROOT="$HOME/.pyenv"
@@ -26,6 +26,10 @@ fi
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
+
+function get_uuid() {
+	echo "cole" > "$(uuidgen)".txt
+}
 
 # set functions path
 fpath=(~/.zsh/functions $fpath)
@@ -106,4 +110,14 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 if `which rbenv > /dev/null`; then
 	eval "$(rbenv init -)"
+fi
+
+#nvm nonsense
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi

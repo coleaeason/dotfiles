@@ -1,5 +1,5 @@
 # Expensify aliases
-alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
+alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv3/bin/activate'
 alias pfab='fab -P -z 10'
 alias gab='fab -g bastion1.sjc'
 alias pgab='gab -P -z 10'
@@ -7,10 +7,37 @@ alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias fhk='~/fuckHostKeys.sh'
 alias misc='cd ~/source/Expensify/misc-scripts/; source venv/bin/activate'
 
-# Git aliases
-alias gm='git pull origin master'
+# Git aliases and functions
+alias gm='git pull origin main'
+# Temporary hacks until all repos I use are switcehd to Main
+#function gm() {
+#	default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+#	local existed_in_remote=$(git ls-remote --heads origin ${default_branch})
+#
+#	if [[ -z ${existed_in_remote} ]]; then
+#		default_branch="main"
+#	else
+#		default_branch="master"
+#	fi
+#
+#	git pull origin "$default_branch"
+#}
+
+#function gcom() {
+#	default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+#	local existed_in_remote=$(git ls-remote --heads origin ${default_branch})
+#
+#	if [[ -z ${existed_in_remote} ]]; then
+#		default_branch="main"
+#	else
+#		default_branch="master"
+#	fi
+#
+#	git checkout "$default_branch"
+#}
+
 alias gco='git checkout'
-alias gcom='git checkout master'
+alias gcom='git checkout main'
 alias gcob='git checkout -b'
 alias gcbo='gcob'
 alias gcm='git commit -m'
@@ -44,3 +71,4 @@ certinfo() {
 }
 
 alias tf='terraform'
+alias tf12='/usr/local/Cellar/terraform/0.12.28/bin/terraform'

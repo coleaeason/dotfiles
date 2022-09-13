@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>5ACCC29F-0B54-4224-8A05-A7E5AEDFE32D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6E3CA1A6-3D8C-4284-BEE0-D9EF424BE6C7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cole Eason</string>
+	<key>description</key>
+	<string>Gets Cole's public gpg key link from expensify.com</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Get Public Key Link</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>gpgk</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Get Cole's GPG Key Link</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>5ACCC29F-0B54-4224-8A05-A7E5AEDFE32D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>https://www.expensify.com/keys/com.expensify.cole-public.asc</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>6E3CA1A6-3D8C-4284-BEE0-D9EF424BE6C7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>5ACCC29F-0B54-4224-8A05-A7E5AEDFE32D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>40</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+		<key>6E3CA1A6-3D8C-4284-BEE0-D9EF424BE6C7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>220</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://coleeason.com</string>
+</dict>
+</plist>

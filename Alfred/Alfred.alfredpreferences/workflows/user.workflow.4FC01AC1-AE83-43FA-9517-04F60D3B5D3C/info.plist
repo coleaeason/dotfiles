@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>06BCB540-E82A-42CC-975F-417FCA204F88</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C7E39BF8-9375-4209-9BFD-66EAA30AA829</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cole Eason</string>
+	<key>description</key>
+	<string>Gets the most recent webhook log from an email</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Last Webhook Log From Email</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>~/marqetaLogs.sh {query} webhook</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.terminalcommand</string>
+			<key>uid</key>
+			<string>C7E39BF8-9375-4209-9BFD-66EAA30AA829</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>lwl</string>
+				<key>subtext</key>
+				<string>Gets last webhook log from email</string>
+				<key>text</key>
+				<string>Last Webhook Log</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>06BCB540-E82A-42CC-975F-417FCA204F88</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>06BCB540-E82A-42CC-975F-417FCA204F88</key>
+		<dict>
+			<key>xpos</key>
+			<integer>45</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+		<key>C7E39BF8-9375-4209-9BFD-66EAA30AA829</key>
+		<dict>
+			<key>xpos</key>
+			<integer>385</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://coleeason.com</string>
+</dict>
+</plist>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>F093736A-5087-47EB-AA8C-EBDA1B737B0F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5D2B1439-E4BF-4896-B802-5D169AF0FC55</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cole Eason</string>
+	<key>description</key>
+	<string>Inserts compelte setup for marqeta python client</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Python Marqeta Client</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>from marqeta import Client
+from libs.authKey import AuthKey
+# Load auth key and pull out the marqeta api creds
+key = AuthKey()
+marqetaKeyParts = key.getKey('marqetaAPICredentials').split(':')
+
+# Setup our marqeta client
+base_url = "https://expensify-mq-api.marqeta.com/v3/"
+application_token = marqetaKeyParts[0]
+access_token = marqetaKeyParts[1]
+timeout = 60
+client = Client(base_url, application_token, access_token, timeout)
+
+</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5D2B1439-E4BF-4896-B802-5D169AF0FC55</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>pymar</string>
+				<key>subtext</key>
+				<string>Inserts complete python marqeta client</string>
+				<key>text</key>
+				<string>Python Marqeta Client</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>F093736A-5087-47EB-AA8C-EBDA1B737B0F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>5D2B1439-E4BF-4896-B802-5D169AF0FC55</key>
+		<dict>
+			<key>xpos</key>
+			<integer>210</integer>
+			<key>ypos</key>
+			<integer>90</integer>
+		</dict>
+		<key>F093736A-5087-47EB-AA8C-EBDA1B737B0F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>30</integer>
+			<key>ypos</key>
+			<integer>90</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://coleeason.com</string>
+</dict>
+</plist>

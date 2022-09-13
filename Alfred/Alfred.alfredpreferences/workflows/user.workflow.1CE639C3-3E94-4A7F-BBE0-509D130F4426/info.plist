@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>connections</key>
+	<dict>
+		<key>09C30598-C9C3-4129-AA82-457EF1880489</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9C79C105-4201-4E4E-A3B3-6D0FDCE62EB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Cole Eason</string>
+	<key>description</key>
+	<string>Call a phone number</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Call</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>76</integer>
+				<key>script</key>
+				<string>do shell script "open tel://{query}"
+
+tell application "System Events"
+    repeat while not (button "Bel" of window 1 of application process "FaceTime" exists)
+        delay 1
+    end repeat
+    click button "Bel" of window 1 of application process "FaceTime"
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>9C79C105-4201-4E4E-A3B3-6D0FDCE62EB6</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>call</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>call</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>09C30598-C9C3-4129-AA82-457EF1880489</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>09C30598-C9C3-4129-AA82-457EF1880489</key>
+		<dict>
+			<key>xpos</key>
+			<integer>130</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+		<key>9C79C105-4201-4E4E-A3B3-6D0FDCE62EB6</key>
+		<dict>
+			<key>xpos</key>
+			<integer>310</integer>
+			<key>ypos</key>
+			<integer>100</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
+	<key>webaddress</key>
+	<string>https://coleeason.com</string>
+</dict>
+</plist>

@@ -6,7 +6,14 @@ if [ -f ~/.secrets ]; then
 fi
 
 # Set PATH
-export PATH="/usr/local/sbin:/usr/local/opt/terraform@0.11/bin:$PATH"
+export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH"
+
+# Pyenv garbage
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+	eval "$(pyenv init -)"
+fi
 
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd

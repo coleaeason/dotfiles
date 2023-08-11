@@ -6,7 +6,11 @@ if [ -f ~/.secrets ]; then
 fi
 
 # Set PATH
-export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH:$(go env GOPATH)/bin"
+export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH"
+
+if command -v go 1>/dev/null 2>&1; then
+	export PATH="$PATH:$(go env GOPATH)/bin/"
+fi
 
 # Pyenv garbage
 export PYENV_ROOT="$HOME/.pyenv"
@@ -14,6 +18,12 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
+
+#nvm garbage
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd

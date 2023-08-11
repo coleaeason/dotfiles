@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>1A3A53AB-B3BD-4B02-B484-FD5A333CC331</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>k2</string>
+			<key>text</key>
+			<string>K2 Dashboard</string>
+			<key>url</key>
+			<string>https://github.com/Expensify/Expensify?currentUser={query}#k2</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

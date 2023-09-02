@@ -1,0 +1,22 @@
+Host seed.coleeason.com
+    User root
+    Hostname 5.135.189.92
+    Port 25010
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    ForwardAgent yes
+Host code.cole.dev
+	User root
+	Hostname 143.198.167.38
+	IdentityFile ~/.ssh/coleeason/id_rsa
+Host 192.241.254.75
+    User root
+    IdentityFile ~/.ssh/coleeason/root/id_rsa
+Host seed.southpoleelf.com
+    Hostname 188.165.236.10
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    ForwardAgent yes
+Host santasworkshop.io
+    Hostname 104.248.67.225
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    User root

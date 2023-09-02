@@ -1,0 +1,40 @@
+Host *
+	IdentityFile ~/.ssh/expensify
+	AddKeysToAgent yes
+	UseKeychain yes
+    RemoteForward /home/cole/.gnupg/S.gpg-agent /Users/cole/.gnupg/S.gpg-agent.extra
+Host expensidev default
+    Hostname 127.0.0.1
+    Port 2222
+    RemoteForward /home/vagrant/.gnupg/S.gpg-agent /Users/cole/.gnupg/S.gpg-agent.extra
+	ForwardAgent yes
+Host github.com
+	User git
+	Hostname github.com
+	IdentityFile ~/.ssh/expensify
+Host seed.coleeason.com
+    User root
+    Hostname 5.135.189.92
+    Port 25010
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    ForwardAgent yes
+Host code.cole.dev
+	User root
+	Hostname 143.198.167.38
+	IdentityFile ~/.ssh/coleeason/id_rsa
+Host 192.241.254.75
+    User root
+    IdentityFile ~/.ssh/coleeason/root/id_rsa
+Host seed.southpoleelf.com
+    Hostname 188.165.236.10
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    ForwardAgent yes
+Host santasworkshop.io
+    Hostname 104.248.67.225
+    IdentityFile ~/.ssh/coleeason/id_rsa
+    User root
+Host svn1.sjc
+	ForwardAgent yes
+Host *expensify.com *us-west-1 *us-east-1 *uw1 *ue1
+	ProxyJump bastion1.sjc

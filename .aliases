@@ -47,7 +47,10 @@ alias gaa='git add .'
 alias gau='git add -u'
 alias gs='git status'
 alias gp='git push origin'
-alias gpn='git push origin --no-verify'
+alias gpn='gp origin --no-verify'
+alias gpf='gp --force'
+alias gpfn='gpn --force'
+alias gpnf='gpfn'
 
 # Bash things
 alias ..='cd ..'
@@ -55,20 +58,19 @@ alias ...='cd ../..'
 alias ll='ls -alhG'
 
 function pr() {
-    remote=`git remote -v | grep origin | head -1 | awk '{print $2}' | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//'`
-    branch=`git rev-parse --abbrev-ref HEAD`
+    remote=$(git remote -v | grep origin | head -1 | awk '{print $2}' | sed 's/.*:\(.*\)*/\1/' | sed 's/\.git$//')
+    branch=$(git rev-parse --abbrev-ref HEAD)
     open "https://github.com/$remote/pull/new/$branch"
 }
 
 # create a socks proxy on port 8080 to a given host, use compression for the data.
 function socks(){
-    ssh -D 8080 -C $1
+    ssh -D 8080 -C "$1"
 }
 
 # get info from a cert quickly
 certinfo() {
-    openssl x509 -in $1 -noout -text
+    openssl x509 -in "$1" -noout -text
 }
 
 alias tf='terraform'
-alias tf12='/usr/local/Cellar/terraform/0.12.28/bin/terraform'

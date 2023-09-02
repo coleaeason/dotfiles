@@ -1,8 +1,8 @@
 #Add key
 
 # load secrets if any
-if [ -f ~/.secrets ]; then
-    source ~/.secrets
+if [ -f "$HOME"/.secrets ]; then
+    source "$HOME"/.secrets
 fi
 
 # Set PATH
@@ -29,12 +29,12 @@ export NVM_DIR="$HOME/.nvm"
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 #Aliases
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
+if [ -f "$HOME"/.aliases ]; then
+    source "$HOME"/.aliases
 fi
 
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
+if [ -f "$HOME"/.bash_aliases ]; then
+    source "$HOME"/.bash_aliases
 fi
 
 function get_uuid() {
@@ -42,7 +42,7 @@ function get_uuid() {
 }
 
 # set functions path
-fpath=(~/.zsh/functions $fpath)
+fpath=("$HOME"/.zsh/functions $fpath)
 
 # do not store duplications
 setopt HIST_IGNORE_DUPS

@@ -1,8 +1,8 @@
 #Add key
 
 # load secrets if any
-if [ -f ~/.secrets ]; then
-    source ~/.secrets
+if [ -f "$HOME"/.secrets ]; then
+    source "$HOME"/.secrets
 fi
 
 # Set PATH
@@ -12,21 +12,21 @@ export PATH=$PATH:$HOME/go/bin
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
 #Aliases
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
+if [ -f "$HOME"/.aliases ]; then
+    source "$HOME"/.aliases
 fi
 
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
+if [ -f "$HOME"/.bash_aliases ]; then
+    source "$HOME"/.bash_aliases
 fi
 
 # git autocomplete
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+if [ -f "$HOME"/.git-completion.bash ]; then
+  . "$HOME"/.git-completion.bash
 fi
 
-if [ -f ~/source/Expensify/Expensidev/Ops-Configs/fabric-completion/fabric-completion.bash ]; then
-  . ~/source/Expensify/Expensidev/Ops-Configs/fabric-completion/fabric-completion.bash
+if [ -f "$HOME"/source/Expensify/Expensidev/Ops-Configs/fabric-completion/fabric-completion.bash ]; then
+  . "$HOME"/source/Expensify/Expensidev/Ops-Configs/fabric-completion/fabric-completion.bash
 fi
 
 HISTCONTROL=ignoreboth
@@ -62,8 +62,8 @@ function get_branch_color {
     fi
 }
 function twolastdirs {
-tmp=${PWD%/*/*};
-[ ${#tmp} -gt 0 -a "$tmp" != "$PWD" ] && echo ${PWD:${#tmp}+1} || echo $PWD;
+    tmp=${PWD%/*/*};
+    [ ${#tmp} -gt 0 -a "$tmp" != "$PWD" ] && echo ${PWD:${#tmp}+1} || echo $PWD;
 }
 
 # Determine active Python virtualenv details.
@@ -71,7 +71,7 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
       PYTHON_VIRTUALENV=""
   else
-      PYTHON_VIRTUALENV="\[\033[0;32m\](`basename \"$VIRTUAL_ENV\"`) "
+      PYTHON_VIRTUALENV="\[\033[0;32m\]($(basename "$VIRTUAL_ENV")) "
   fi
 }
 
@@ -86,10 +86,9 @@ function color_my_prompt {
     fi
     local dircolor="\[\033[01;34m\]"
     local separatorcolor="\[\033[00;32m\]"
-    local dir="\W"
     local twolastdirs="$(twolastdirs)"
     local branch_color=$(get_branch_color)
-    local git_branch='`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`'
+    local git_branch="$(git branch 2> /dev/null | grep -e "^.*" | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /)"
     local last_color="\[\033[00m\]"
     local prompt_symbol=">"
     set_virtualenv

@@ -1,0 +1,12 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    hooksPath = ~/.git/hooks
+[user]
+    name = Cole Eason
+    email = ceason2012@gmail.com
+    signingkey = 37DDE27C0C6F665F!
+[push]
+    default = current
+[commit]
+    gpgsign = true

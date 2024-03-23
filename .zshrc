@@ -1,4 +1,8 @@
-#Add key
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+	if command -v oh-my-posh 1>/dev/null 2>&1; then 
+ 		eval "$(oh-my-posh init zsh --config $HOME/source/dotfiles/theme.omp.json)"
+	fi
+fi
 
 # load secrets if any
 if [ -f "$HOME"/.secrets ]; then
@@ -6,7 +10,7 @@ if [ -f "$HOME"/.secrets ]; then
 fi
 
 # Set PATH
-export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/opt/terraform@0.11/bin:/Users/cole/Library/Python/3.8/bin/:$PATH"
+export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 if command -v go 1>/dev/null 2>&1; then
 	export PATH="$PATH:$(go env GOPATH)/bin/"
@@ -24,6 +28,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+# rbenv garbage
+if command -v rbenv 1>/dev/null 2>&1; then
+	eval "$(rbenv init -)"
+fi
 
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
@@ -101,33 +109,23 @@ function set_virtualenv () {
 
 autoload -Uz vcs_info 
 autoload -U compinit && compinit
-precmd() { 
-	vcs_info
-	branch_color=$(get_branch_color)
-	PYTHON_VIRTUALENV=$(set_virtualenv)
- }
-zstyle ':vcs_info:git:*' formats '(%b) '
 
-# %B starts bold
-# %b stops bold
-# %F{number} starts new color
-# %f stops color
-# %m for short hostname
-# %2d for last 2 dirs
+if ! command -v oh-my-posh 1>/dev/null 2>&1; then
 
-PROMPT='${PYTHON_VIRTUALENV}%B%F{14}%m%f%b%F{2}->%f%B%F{4}%2d%f%b %B${branch_color}${vcs_info_msg_0_}%f%b%F{2}>%f '
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+    precmd() { 
+        vcs_info
+        branch_color=$(get_branch_color)
+        PYTHON_VIRTUALENV=$(set_virtualenv)
+    }
+    zstyle ':vcs_info:git:*' formats '(%b) '
 
-if `which rbenv > /dev/null`; then
-	eval "$(rbenv init -)"
-fi
+    # %B starts bold
+    # %b stops bold
+    # %F{number} starts new color
+    # %f stops color
+    # %m for short hostname
+    # %2d for last 2 dirs
 
-#nvm nonsense
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+    PROMPT='${PYTHON_VIRTUALENV}%B%F{14}%m%f%b%F{2}->%f%B%F{4}%2d%f%b %B${branch_color}${vcs_info_msg_0_}%f%b%F{2}>%f '
+    test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi

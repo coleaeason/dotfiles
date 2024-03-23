@@ -31,7 +31,8 @@
             "max_depth": 1,
             "mixed_threshold": 1,
             "mapped_locations": {
-              "C:\\Users\\cole\\source": "\uF09B "
+              "C:\\Users\\cole\\source": "\uF09B ",
+              "/Users/cole/source": "\uF09B"
             }
           }
         },

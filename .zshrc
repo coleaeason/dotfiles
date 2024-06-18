@@ -1,5 +1,5 @@
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-	if command -v oh-my-posh 1>/dev/null 2>&1; then 
+	if command -v oh-my-posh 1>/dev/null 2>&1; then
  		eval "$(oh-my-posh init zsh --config $HOME/source/dotfiles/theme.omp.json)"
 	fi
 fi
@@ -7,6 +7,22 @@ fi
 # load secrets if any
 if [ -f "$HOME"/.secrets ]; then
     source "$HOME"/.secrets
+fi
+
+# load 1Password Plugins if inited
+if [ -f "$HOME"/.config/op/plugins.sh ]; then
+    source "$HOME"/.config/op/plugins.sh
+fi
+
+CA_CERT_PATH="/Users/cole/source/Expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
+
+if [ -f "$CA_CERT_PATH" ]; then
+    export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
+    export AWS_CA_BUNDLE="$CA_CERT_PATH"
+    export SSL_CERT_FILE="$CA_CERT_PATH"
+    export CURL_CA_BUNDLE="$CA_CERT_PATH"
+    export BUNDLE_SSL_CA_CERT="$CA_CERT_PATH"
+    export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
 fi
 
 # Set PATH
@@ -17,10 +33,10 @@ if command -v go 1>/dev/null 2>&1; then
 fi
 
 # Pyenv garbage
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/shims:$PATH"
 fi
 
 #nvm garbage
@@ -31,6 +47,7 @@ export NVM_DIR="$HOME/.nvm"
 # rbenv garbage
 if command -v rbenv 1>/dev/null 2>&1; then
 	eval "$(rbenv init -)"
+    export PATH=$HOME/.rbenv/shims:$PATH
 fi
 
 # Set colors to always be like linux
@@ -107,12 +124,12 @@ function set_virtualenv () {
   fi
 }
 
-autoload -Uz vcs_info 
+autoload -Uz vcs_info
 autoload -U compinit && compinit
 
 if ! command -v oh-my-posh 1>/dev/null 2>&1; then
 
-    precmd() { 
+    precmd() {
         vcs_info
         branch_color=$(get_branch_color)
         PYTHON_VIRTUALENV=$(set_virtualenv)

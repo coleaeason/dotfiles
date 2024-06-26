@@ -17,7 +17,8 @@
           "type": "session",
           "style": "plain",
           "foreground": "#ffffff",
-          "template": " {{ .HostName }} "
+          "background": "c386f1",
+          "template": "{{ .HostName }} "
         },
         {
           "type": "path",

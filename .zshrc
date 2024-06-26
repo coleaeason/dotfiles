@@ -1,3 +1,6 @@
+# Set PATH
+export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 	if command -v oh-my-posh 1>/dev/null 2>&1; then
  		eval "$(oh-my-posh init zsh --config $HOME/source/dotfiles/theme.omp.json)"
@@ -25,8 +28,6 @@ if [ -f "$CA_CERT_PATH" ]; then
     export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
 fi
 
-# Set PATH
-export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 
 if command -v go 1>/dev/null 2>&1; then
 	export PATH="$PATH:$(go env GOPATH)/bin/"
@@ -40,9 +41,38 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 #nvm garbage
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+if command -v nvm 1>/dev/null 2>&1; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+    # Add auto node version switching with nvm for any directory
+    # that has an nvmrc in it. Will also install if the node version
+    # requested is missing.
+    autoload -U add-zsh-hook
+
+    load-nvmrc() {
+    local nvmrc_path
+    nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [ -n "$nvmrc_path" ]; then
+        local nvmrc_node_version
+        nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+        if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+        elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
+        nvm use
+        fi
+    elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
+        echo "Reverting to nvm default version"
+        nvm use default
+    fi
+    }
+
+    add-zsh-hook chpwd load-nvmrc
+    load-nvmrc
+fi
 
 # rbenv garbage
 if command -v rbenv 1>/dev/null 2>&1; then

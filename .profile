@@ -88,7 +88,7 @@ function color_my_prompt {
     local separatorcolor="\[\033[00;32m\]"
     local twolastdirs="$(twolastdirs)"
     local branch_color=$(get_branch_color)
-    local git_branch="$(git branch 2> /dev/null | grep -e "^.*" | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /)"
+    local git_branch="$(git branch 2> /dev/null | grep -e "^*" | sed -E  s/^\\\*\ \(.+\)$/\(\\\1\)\ /)"
     local last_color="\[\033[00m\]"
     local prompt_symbol=">"
     set_virtualenv

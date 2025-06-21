@@ -1,5 +1,6 @@
 # Set PATH
 # This keeps the path unique, so if you source this zshrc it won't add duplicates.
+# zsh automatically exports `path` as $PATH
 typeset -U path
 path=(/usr/local/sbin $path)
 

@@ -1,6 +1,32 @@
 # Set PATH
-export PATH="/usr/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+# This keeps the path unique, so if you source this zshrc it won't add duplicates.
+typeset -U path
+path=(/usr/local/sbin $path)
 
+# If homebrew is installed, add its bin and sbin directories to the path.
+if [[ -d /opt/homebrew/bin ]]; then
+    path=(/opt/homebrew/bin /opt/homebrew/sbin $path)
+fi
+
+# If Go is intalled, add its bin directory to the path.
+if command -v go 1>/dev/null 2>&1; then
+	path=($path "$(go env GOPATH)/bin/")
+fi
+
+# Pyenv garbage
+if command -v pyenv 1>/dev/null 2>&1; then
+	eval "$(pyenv init -)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    path=("$PYENV_ROOT/shims" $path)
+fi
+
+# rbenv garbage
+if command -v rbenv 1>/dev/null 2>&1; then
+	eval "$(rbenv init -)"
+    path=("$HOME/.rbenv/shims" $path)
+fi
+
+# Only add omhy-posh if not in Apple Terminal, it doesn't support it.
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 	if command -v oh-my-posh 1>/dev/null 2>&1; then
  		eval "$(oh-my-posh init zsh --config $HOME/source/dotfiles/theme.omp.json)"
@@ -8,36 +34,26 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 fi
 
 # load secrets if any
-if [ -f "$HOME"/.secrets ]; then
+# DEPRECATED: Used 1Password env instead.
+if [[ -f "$HOME"/.secrets ]]; then
     source "$HOME"/.secrets
 fi
 
 # load 1Password Plugins if inited
-if [ -f "$HOME"/.config/op/plugins.sh ]; then
+if [[ -f "$HOME"/.config/op/plugins.sh ]]; then
     source "$HOME"/.config/op/plugins.sh
 fi
 
+# Work nonsense, add Warp certificate and set all of the env variables as required.
 CA_CERT_PATH="/Users/cole/source/Expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
 
-if [ -f "$CA_CERT_PATH" ]; then
+if [[ -f "$CA_CERT_PATH" ]]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
     export AWS_CA_BUNDLE="$CA_CERT_PATH"
     export SSL_CERT_FILE="$CA_CERT_PATH"
     export CURL_CA_BUNDLE="$CA_CERT_PATH"
     export BUNDLE_SSL_CA_CERT="$CA_CERT_PATH"
     export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
-fi
-
-
-if command -v go 1>/dev/null 2>&1; then
-	export PATH="$PATH:$(go env GOPATH)/bin/"
-fi
-
-# Pyenv garbage
-if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/shims:$PATH"
 fi
 
 #nvm garbage
@@ -74,12 +90,6 @@ if command -v nvm 1>/dev/null 2>&1; then
     load-nvmrc
 fi
 
-# rbenv garbage
-if command -v rbenv 1>/dev/null 2>&1; then
-	eval "$(rbenv init -)"
-    export PATH=$HOME/.rbenv/shims:$PATH
-fi
-
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
@@ -91,10 +101,6 @@ fi
 if [ -f "$HOME"/.bash_aliases ]; then
     source "$HOME"/.bash_aliases
 fi
-
-function get_uuid() {
-	echo "cole" > "$(uuidgen)".txt
-}
 
 # set functions path
 fpath=("$HOME"/.zsh/functions $fpath)
@@ -121,43 +127,43 @@ setopt PROMPT_SUBST
 HISTSIZE=100000
 HISTFILESIZE=200000
 
-function parse_git_dirty {
-    if ! git ls-files >& /dev/null; then
-        echo ""
-    else
-        [[ $(git diff --shortstat) ]] && echo "*"
-    fi
-}
-
-function get_branch_color {
-    if ! git ls-files >& /dev/null; then
-        echo ""
-    else
-        local dirty=$(parse_git_dirty)
-        if [[ $dirty == '*' ]]; then
-            echo "%F{9}"
-        else
-            echo "%F{2}"
-        fi
-    fi
-}
-
 # Disable default venv PS1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-# Determine active Python virtualenv details.
-function set_virtualenv () {
-  if test -z "$VIRTUAL_ENV" ; then
-      echo ""
-  else
-      echo "🐍%F{2}(`basename \"$VIRTUAL_ENV\"`)%f "
-  fi
-}
 
 autoload -Uz vcs_info
 autoload -U compinit && compinit
 
 if ! command -v oh-my-posh 1>/dev/null 2>&1; then
+
+    # Determine active Python virtualenv details.
+    function set_virtualenv () {
+        if test -z "$VIRTUAL_ENV" ; then
+            echo ""
+        else
+            echo "🐍%F{2}(`basename \"$VIRTUAL_ENV\"`)%f "
+        fi
+    }
+
+    function parse_git_dirty {
+        if ! git ls-files >& /dev/null; then
+            echo ""
+        else
+            [[ $(git diff --shortstat) ]] && echo "*"
+        fi
+    }
+
+    function get_branch_color {
+        if ! git ls-files >& /dev/null; then
+            echo ""
+        else
+            local dirty=$(parse_git_dirty)
+            if [[ $dirty == '*' ]]; then
+                echo "%F{9}"
+            else
+                echo "%F{2}"
+            fi
+        fi
+    }
 
     precmd() {
         vcs_info

@@ -47,7 +47,7 @@ alias gaa='git add .'
 alias gau='git add -u'
 alias gs='git status'
 alias gp='git push origin'
-alias gpn='gp origin --no-verify'
+alias gpn='gp --no-verify'
 alias gpf='gp --force'
 alias gpfn='gpn --force'
 alias gpnf='gpfn'
@@ -69,7 +69,7 @@ function socks(){
 }
 
 # get info from a cert quickly
-certinfo() {
+function certinfo() {
     openssl x509 -in "$1" -noout -text
 }
 

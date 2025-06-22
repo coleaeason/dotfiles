@@ -27,6 +27,9 @@ if command -v rbenv 1>/dev/null 2>&1; then
     path=("$HOME/.rbenv/shims" $path)
 fi
 
+# Oh-My-Zosh
+export ZSH="$HOME/.oh-my-zsh"
+
 # Only add omhy-posh if not in Apple Terminal, it doesn't support it.
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 	if command -v oh-my-posh 1>/dev/null 2>&1; then
@@ -62,7 +65,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-if command -v nvm 1>/dev/null 2>&1; then
+[ -d "$ZSH" ] && plugins=(nvm)
+
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' autoload yes
+zstyle ':omz:update' mode reminder
+
+[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+if false; then
     # Add auto node version switching with nvm for any directory
     # that has an nvmrc in it. Will also install if the node version
     # requested is missing.
@@ -183,3 +194,5 @@ if ! command -v oh-my-posh 1>/dev/null 2>&1; then
     PROMPT='${PYTHON_VIRTUALENV}%B%F{14}%m%f%b%F{2}->%f%B%F{4}%2d%f%b %B${branch_color}${vcs_info_msg_0_}%f%b%F{2}>%f '
     test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
+
+source $ZSH/oh-my-zsh.sh

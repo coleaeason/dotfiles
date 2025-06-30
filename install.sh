@@ -6,10 +6,15 @@ if [[ "$1" == "personal" ]]; then
 	TYPE="personal"
 fi
 
-echo "Using type $TYPE"
+OS=$(uname -s)
+
+echo "Using type $TYPE on $OS"
 
 DIR="$( cd "$(dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Ignore the warning about not using ls because we need to use it to list files that
+# start with a dot. Globbing does not work for this.
+# shellcheck disable=SC2010
 for item in $(ls -d .??* | grep -v -x .git | grep -v -x .vagrant.d | grep -v .gitconfig); do
     ln -snf "$DIR"/"$item" ~
 done
@@ -38,5 +43,26 @@ fi
 for file in .vagrant.d/*; do
 	ln -snf "$DIR"/"$file" ~/.vagrant.d/
 done
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Only install oh-my-zsh plugins on non-Darwin systems, otherwise they are installed by brew.
+if [[ "$OS" != "Darwin" ]]; then
+	# Install oh-my-posh
+	curl -s https://ohmyposh.dev/install.sh | bash -s
+
+	# Install oh-my-posh font
+	oh-my-posh font install meslo
+
+	# Install oh-my-zsh plugins
+	ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+
+	# zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+
+	# zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
 
 echo "Done."

@@ -44,30 +44,42 @@ for file in .vagrant.d/*; do
 	ln -snf "$DIR"/"$file" ~/.vagrant.d/
 done
 
+# Link the oh-my-posh theme file.
+ln -snf "$DIR"/theme.omp.json ~/theme.omp.json
+
 # Linux doesn't have default set to zsh, so we need to set it.
 if [[ "$OS" != "Darwin" ]]; then
 	sudo chsh -s "$(which zsh)" "$USER"
 fi
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+# Install oh-my-zsh if it's not already installed.
+if [[ -z "$ZSH" ]]; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+fi
 
 # Only install oh-my-zsh plugins on non-Darwin systems, otherwise they are installed by brew.
 if [[ "$OS" != "Darwin" ]]; then
-	# Install oh-my-posh
-	curl -s https://ohmyposh.dev/install.sh | bash -s
+	if ! command -v oh-my-posh 1>/dev/null 2>&1; then
+		# Install oh-my-posh
+		curl -s https://ohmyposh.dev/install.sh | bash -s
 
-	# Install oh-my-posh font
-	oh-my-posh font install meslo
+		# Install oh-my-posh font
+		oh-my-posh font install meslo
+	fi
 
 	# Install oh-my-zsh plugins
 	ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
-	# zsh-autosuggestions
-	git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+	PLUGINS=(
+		"zsh-autosuggestions"
+		"zsh-syntax-highlighting"
+	)
 
-	# zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+	for plugin in "${PLUGINS[@]}"; do
+		if [[ ! -d "$ZSH_CUSTOM/plugins/$plugin" ]]; then
+			git clone "https://github.com/zsh-users/$plugin.git" "$ZSH_CUSTOM/plugins/$plugin"
+		fi
+	done
 fi
 
 echo "Done."

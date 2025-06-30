@@ -1,15 +1,18 @@
+# Uncomment this line and the last line in this file to profile zshrc start times.
+#zmodload zsh/zprof
+
 # Set PATH
 # This keeps the path unique, so if you source this zshrc it won't add duplicates.
 # zsh automatically exports `path` as $PATH
 typeset -U path
-path=(/usr/local/sbin $path)
+path=($HOME/.local/bin /usr/local/sbin $path)
 
 # If homebrew is installed, add its bin and sbin directories to the path.
 if [[ -d /opt/homebrew/bin ]]; then
     path=(/opt/homebrew/bin /opt/homebrew/sbin $path)
 fi
 
-# If Go is intalled, add its bin directory to the path.
+# If Go is installed, add its bin directory to the path.
 if command -v go 1>/dev/null 2>&1; then
 	path=($path "$(go env GOPATH)/bin/")
 fi
@@ -27,13 +30,20 @@ if command -v rbenv 1>/dev/null 2>&1; then
     path=("$HOME/.rbenv/shims" $path)
 fi
 
-# Oh-My-Zosh
+# Android tools
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")
+
+# Java Tools
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
+
+# Oh-My-Zsh
 export ZSH="$HOME/.oh-my-zsh"
 
-# Only add omhy-posh if not in Apple Terminal, it doesn't support it.
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 	if command -v oh-my-posh 1>/dev/null 2>&1; then
- 		eval "$(oh-my-posh init zsh --config $HOME/source/dotfiles/theme.omp.json)"
+        SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ 		eval "$(oh-my-posh init zsh --config $SCRIPT_DIR/theme.omp.json)"
 	fi
 fi
 
@@ -60,46 +70,20 @@ if [[ -f "$CA_CERT_PATH" ]]; then
     export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
 fi
 
-#nvm garbage
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
+# nvm Plugin settings for oh-my-zsh
+# This lazy loads the nvm plugin, so it doesn't slow down the shell startup time.
+# it will load when you first execute npm, node, etc anything that might need it.
 [ -d "$ZSH" ] && plugins=(nvm)
 
 zstyle ':omz:plugins:nvm' lazy yes
 zstyle ':omz:plugins:nvm' autoload yes
 zstyle ':omz:update' mode reminder
 
-[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-if false; then
-    # Add auto node version switching with nvm for any directory
-    # that has an nvmrc in it. Will also install if the node version
-    # requested is missing.
-    autoload -U add-zsh-hook
-
-    load-nvmrc() {
-    local nvmrc_path
-    nvmrc_path="$(nvm_find_nvmrc)"
-
-    if [ -n "$nvmrc_path" ]; then
-        local nvmrc_node_version
-        nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-        if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-        elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
-        nvm use
-        fi
-    elif [ -n "$(PWD=$OLDPWD nvm_find_nvmrc)" ] && [ "$(nvm version)" != "$(nvm version default)" ]; then
-        echo "Reverting to nvm default version"
-        nvm use default
-    fi
-    }
-
-    add-zsh-hook chpwd load-nvmrc
-    load-nvmrc
+# On macos this is in brew, otherwise it's in the oh-my-zsh plugins directory.
+if command -v brew 1>/dev/null 2>&1; then
+    [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+else
+    [ -f "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
 
 # Set colors to always be like linux
@@ -196,3 +180,6 @@ if ! command -v oh-my-posh 1>/dev/null 2>&1; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+# Uncomment this line and the first line in this file to profile zshrc start times.
+# zprof

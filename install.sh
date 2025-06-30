@@ -44,8 +44,13 @@ for file in .vagrant.d/*; do
 	ln -snf "$DIR"/"$file" ~/.vagrant.d/
 done
 
+# Linux doesn't have default set to zsh, so we need to set it.
+if [[ "$OS" != "Darwin" ]]; then
+	sudo chsh -s "$(which zsh)" "$USER"
+fi
+
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
 # Only install oh-my-zsh plugins on non-Darwin systems, otherwise they are installed by brew.
 if [[ "$OS" != "Darwin" ]]; then

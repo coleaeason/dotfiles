@@ -3,7 +3,7 @@
     excludesfile = ~/.gitignore
     hooksPath = ~/.git/hooks
 [user]
-    name = Cole Eason
+	name = Cole Eason
     email = cole@expensify.com
     signingkey = 88F8F06DD13BA073!
 [push]
@@ -12,3 +12,8 @@
     gpgsign = true
 [pull]
 	rebase = false
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

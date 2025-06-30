@@ -45,4 +45,4 @@ function certinfo() {
     openssl x509 -in "$1" -noout -text
 }
 
-alias tf='terraform'
+alias tf='op run --env-file=$HOME/source/Expensify/Expensidev/Terraform/.env -- /opt/homebrew/bin/terraform'

@@ -1,5 +1,7 @@
 #Add key
-
+if command -v oh-my-posh 1>/dev/null 2>&1; then
+	eval "$(oh-my-posh init bash --config $HOME/.theme.omp.json)"
+fi
 # load secrets if any
 if [ -f "$HOME"/.secrets ]; then
     source "$HOME"/.secrets
@@ -94,7 +96,12 @@ function color_my_prompt {
     set_virtualenv
     export PS1="${PYTHON_VIRTUALENV}$host$separatorcolor->$dircolor$twolastdirs $branch_color$git_branch$separatorcolor$prompt_symbol$last_color "
 }
-PROMPT_COMMAND=color_my_prompt
 
+
+if command -v oh-my-posh 1>/dev/null 2>&1; then
+	eval "$(oh-my-posh init bash --config $HOME/.theme.omp.json)"
+else
+	PROMPT_COMMAND=color_my_prompt
+fi
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 

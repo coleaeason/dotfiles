@@ -34,6 +34,9 @@ fi
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")
 
+# Ubuntu keychain similar to macos keychain behavior for ssh
+eval $(keychain --eval id_ed25519)
+
 # Java Tools
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 
@@ -61,8 +64,15 @@ if [[ -f "$HOME"/.config/op/plugins.sh ]]; then
     source "$HOME"/.config/op/plugins.sh
 fi
 
+# bun completions
+[ -s "/home/cole/.bun/_bun" ] && source "/home/cole/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export path=($path "$BUN_INSTALL/bin" )
+
 # Work nonsense, add Warp certificate and set all of the env variables as required.
-CA_CERT_PATH="/Users/cole/source/Expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
+CA_CERT_PATH="$HOME/source/Expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
 
 if [[ -f "$CA_CERT_PATH" ]]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
@@ -73,6 +83,13 @@ if [[ -f "$CA_CERT_PATH" ]]; then
     export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
 fi
 
+# Fixes UV with WARP
+export UV_NATIVE_TLS=1
+
+# Make GPG work in headless terminals
+if [[ -z $GPG_TTY ]] && tty -s; then
+	export GPG_TTY=$(tty)
+fi
 # nvm Plugin settings for oh-my-zsh
 # This lazy loads the nvm plugin, so it doesn't slow down the shell startup time.
 # it will load when you first execute npm, node, etc anything that might need it.
@@ -190,3 +207,4 @@ source $ZSH/oh-my-zsh.sh
 
 # Uncomment this line and the first line in this file to profile zshrc start times.
 # zprof
+

@@ -101,6 +101,10 @@ if [ -f "$HOME"/.bash_aliases ]; then
     source "$HOME"/.bash_aliases
 fi
 
+if command -v nvim 1>/dev/null 2>&1; then
+    alias vim='nvim'
+fi
+
 # set functions path
 fpath=("$HOME"/.zsh/functions $fpath)
 

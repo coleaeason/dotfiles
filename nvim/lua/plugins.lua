@@ -12,35 +12,37 @@ return {
     },
     { 
 		"neovim/nvim-lspconfig",
-        config = function(_, opts)
-            vim.lsp.conf.setup({ server = opts })
-            return true
+		config = function(server, opts)
+            for server, settings in pair(opts.servers) do
+                vim.lsp.config(server, settings)
+                vim.lsp.enable(server)
+            end
         end,
-		opts = {
-            -- inlay_hints = {
-            --     enabled = true,
+		opts = function()
+            local servers = { 
+                rust_analyzer = { settings = {
+            --     imports = {
+            --         granularity = {
+            --             group = "module",
+            --         },
+            --     prefix = "self",
+            --     },
+            --     cargo = {
+            --         buildScripts = {
+            --             enable = true,
+            --         },
+            --     },
+            --     procMacro = {
+            --         enable = true
+            --     },
             -- },
-        servers = { 
-            rust_analyzer = { }
-        }
-    }
-}
-        --         imports = {
-        --             granularity = {
-        --                 group = "module",
-        --             },
-        --         prefix = "self",
-        --         },
-        --         cargo = {
-        --             buildScripts = {
-        --                 enable = true,
-        --             },
-        --         },
-        --         procMacro = {
-        --             enable = true
-        --         },
-        --     },
-        -- },
-    --     },
-    -- },
+        },
+            -- inlay_hints = {
+            --    enabled = true,
+            --},
+        },
+        },
+            return servers
+        end,
+    },
 }

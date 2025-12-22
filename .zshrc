@@ -27,7 +27,7 @@ fi
 # rbenv garbage
 if command -v rbenv 1>/dev/null 2>&1; then
 	eval "$(rbenv init -)"
-    path=("$HOME/.rbenv/shims" $path)
+   path=("$HOME/.rbenv/shims" $path)
 fi
 
 # configure rust

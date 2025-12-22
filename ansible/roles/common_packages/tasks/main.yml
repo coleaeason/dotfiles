@@ -1,0 +1,22 @@
+- name: Install base packages (Linux)
+  become: true
+  when: ansible_system == 'Linux'
+  ansible.builtin.apt:
+    name: "{{ common_packages_list }}"
+    state: 'present'
+
+- name: Install base packages (macOS)
+  when: ansible_system == 'Darwin'
+  community.general.homebrew:
+    name: "{{ common_packages }}"
+    state: 'present'
+
+  # We're currently using NFS for Shared Directories on Expensidev with Linux due to a weird bug where
+  # some data streams on vboxsf driver get replaced with zeros (eg, file contents written inside the
+  # VM becomes all zeros, and file mtimes are listed as 0)
+- name: Install nfs-kernel-server on Linux for Expensidev
+  become: true
+  when: ansible_system == 'Linux'
+  ansible.builtin.apt:
+    name: 'nfs-kernel-server'
+    state: 'present'

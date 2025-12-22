@@ -1,0 +1,17 @@
+- name: Optional Additional Apps
+  hosts: localhost
+  become: true
+
+  # Note: All roles below have the `never` tag added in order to prevent someone
+  # accidentally running the entire playbook and installing everything.
+  # This playbook should be called using the `--tags` option to explicitly run
+  # the given role (using `--tags foo` overrides the `never` tag)
+  roles:
+    - role: firefox
+      tags: firefox, never
+    - role: terraform
+      tags: terraform, never
+    - role: vagrant
+      tags: vagrant, never
+    - role: virtualbox
+      tags: virtualbox, never

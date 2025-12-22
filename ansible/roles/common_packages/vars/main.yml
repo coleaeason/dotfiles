@@ -1,0 +1,16 @@
+# Packages that will get installed on both Linux and macOS
+common_packages_list:
+  - 'gh'
+  - 'git'
+  - 'jq'
+  - 'mkcert'
+  - 'bat'
+  - 'htop'
+  - 'make'
+  - 'neovim'
+  - 'tree'
+  - 'yq'
+  - 'tmux'
+  - 'neofetch'
+  - 'zstd'
+  - 'zlib'

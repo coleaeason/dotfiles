@@ -1,0 +1,22 @@
+- name: Bootstrap for Expensify Workstations
+  hosts: localhost
+  roles:
+    - role: common_packages
+      tags: packages
+    - role: auditbot
+      tags: auditbot
+    - role: cloudflare_warp
+      tags: warp
+    - role: falcon_sensor
+      tags: falcon
+    - role: one_password
+      tags: 1password
+    - role: slack
+      tags: slack
+    - role: expensify_root_ca
+      tags: expensify_root_ca
+
+  tasks:
+    # `ansible_system` is either `Darwin` or `Linux` so we can dynamically load tasks suitable for each OS
+    - name: Import Operating System Specific Playbook
+      ansible.builtin.include_tasks: "bootstrap_{{ ansible_system | lower }}.yml"

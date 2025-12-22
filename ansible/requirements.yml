@@ -1,0 +1,11 @@
+#
+# This file defines additional roles and/or collections required for this
+# ansible configurations to work.
+# It is used by the ansible-lint GitHub Action to ensure the required
+# collections (modules) are available to be able to run ansible-lint
+#
+# If you need to install any other these collections on your local machine:
+#   ansible-galaxy install -r requirements.yml
+#
+collections:
+  - name: community.general

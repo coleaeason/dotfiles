@@ -32,19 +32,22 @@ fi
 
 # Android tools
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")
+path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")
 
 # Java Tools
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
+
+# rust
+path=($path "$HOME/.cargo/bin" "$(brew --prefix rustup)/bin")
 
 # Oh-My-Zsh
 export ZSH="$HOME/.oh-my-zsh"
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-	if command -v oh-my-posh 1>/dev/null 2>&1; then
+    if command -v oh-my-posh 1>/dev/null 2>&1; then
         SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
- 		eval "$(oh-my-posh init zsh --config $SCRIPT_DIR/theme.omp.json)"
-	fi
+        eval "$(oh-my-posh init zsh --config $HOME/theme.omp.json)"
+    fi
 fi
 
 # load secrets if any
@@ -96,6 +99,10 @@ fi
 
 if [ -f "$HOME"/.bash_aliases ]; then
     source "$HOME"/.bash_aliases
+fi
+
+if command -v nvim 1>/dev/null 2>&1; then
+    alias vim='nvim'
 fi
 
 # set functions path

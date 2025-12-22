@@ -2,6 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
     hooksPath = ~/.git/hooks
+	pager = cat
 [user]
     name = Cole Eason
     email = ceason2012@gmail.com

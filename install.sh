@@ -52,6 +52,14 @@ if [[ "$OS" != "Darwin" ]]; then
 	sudo chsh -s "$(which zsh)" "$USER"
 fi
 
+if [[ ! -d ~/.config/nvim ]]; then
+    mkdir -p ~/.config/nvim
+fi
+
+for file in nvim/*; do
+    ln -snf "$DIR"/"$file" ~/.config/nvim/
+done
+
 # Install oh-my-zsh if it's not already installed.
 if [[ -z "$ZSH" ]]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc

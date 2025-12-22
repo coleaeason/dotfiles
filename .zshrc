@@ -49,6 +49,7 @@ export ZSH="$HOME/.oh-my-zsh"
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     if command -v oh-my-posh 1>/dev/null 2>&1; then
         eval "$(oh-my-posh init zsh --config $HOME/theme.omp.json)"
+    fi
 fi
 
 # load secrets if any

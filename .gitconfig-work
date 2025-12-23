@@ -2,6 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
     hooksPath = ~/.git/hooks
+	pager = 
 [user]
 	name = Cole Eason
     email = cole@expensify.com
@@ -17,3 +18,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[init]
+	defaultBranch = main

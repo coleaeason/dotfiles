@@ -44,7 +44,9 @@ eval $(keychain --eval id_ed25519)
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 
 # rust
-path=($path "$HOME/.cargo/bin" "$(brew --prefix rustup)/bin")
+if command -v brew 1>/dev/null 2>&1; then
+    path=($path "$HOME/.cargo/bin" "$(brew --prefix rustup)/bin")
+fi
 
 # Oh-My-Zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -74,7 +76,7 @@ export BUN_INSTALL="$HOME/.bun"
 export path=($path "$BUN_INSTALL/bin" )
 
 # Work nonsense, add Warp certificate and set all of the env variables as required.
-CA_CERT_PATH="/Users/cole/source/Expensify/Expensidev/Ops-Configs/cacert.pem"
+CA_CERT_PATH="$HOME/source/Expensify/Expensidev/Ops-Configs/cacert.pem"
 
 if [[ -f "$CA_CERT_PATH" ]]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"

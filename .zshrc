@@ -19,16 +19,19 @@ fi
 
 # Pyenv garbage
 if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
-    export PYENV_ROOT="$HOME/.pyenv"
-    path=("$PYENV_ROOT/shims" $path)
+	# eval "$(pyenv init -)"
+    # export PYENV_ROOT="$HOME/.pyenv"
+    # path=("$PYENV_ROOT/shims" $path)
 fi
 
 # rbenv garbage
 if command -v rbenv 1>/dev/null 2>&1; then
 	eval "$(rbenv init -)"
-    path=("$HOME/.rbenv/shims" $path)
+   path=("$HOME/.rbenv/shims" $path)
 fi
+
+# configure rust
+path=($path "$(brew --prefix rustup)/bin" "$HOME/.cargo/bin")
 
 # Android tools
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -48,7 +51,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     if command -v oh-my-posh 1>/dev/null 2>&1; then
-        SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
         eval "$(oh-my-posh init zsh --config $HOME/theme.omp.json)"
     fi
 fi
@@ -72,7 +74,7 @@ export BUN_INSTALL="$HOME/.bun"
 export path=($path "$BUN_INSTALL/bin" )
 
 # Work nonsense, add Warp certificate and set all of the env variables as required.
-CA_CERT_PATH="$HOME/source/Expensify/Expensidev/Ops-Configs/saltfab/cacert.pem"
+CA_CERT_PATH="/Users/cole/source/Expensify/Expensidev/Ops-Configs/cacert.pem"
 
 if [[ -f "$CA_CERT_PATH" ]]; then
     export NODE_EXTRA_CA_CERTS="$CA_CERT_PATH"
@@ -93,7 +95,7 @@ fi
 # nvm Plugin settings for oh-my-zsh
 # This lazy loads the nvm plugin, so it doesn't slow down the shell startup time.
 # it will load when you first execute npm, node, etc anything that might need it.
-[ -d "$ZSH" ] && plugins=(nvm)
+[ -d "$ZSH" ] && plugins=(nvm uv mise)
 
 zstyle ':omz:plugins:nvm' lazy yes
 zstyle ':omz:plugins:nvm' autoload yes
@@ -105,6 +107,9 @@ if command -v brew 1>/dev/null 2>&1; then
 else
     [ -f "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
+
+# Configure GAM
+export GAMCFGDIR="$HOME/.gam"
 
 # Set colors to always be like linux
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd

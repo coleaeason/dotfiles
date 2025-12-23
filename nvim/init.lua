@@ -97,29 +97,32 @@ end, { desc = 'Print the git blame for the current line' })
 -- 'updatetime' and when going to insert mode
 vim.cmd('packadd! nohlsearch')
 
--- Rust LSP config
-vim.lsp.config['rust_analyzer'] = {
-    on_attach = function(client, bufnr)
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-    end,
-    settings = {
-        ["rust-analyzer"] = {
-            imports = {
-                granularity = {
-                    group = "module",
-                },
-                prefix = "self",
-            },
-            cargo = {
-                buildScripts = {
-                    enable = true,
-                },
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    }
-}
+-- Load lazy.nvim
+require("config.lazy")
 
-vim.lsp.enable('rust_analyzer')
+-- Rust LSP config
+-- vim.lsp.config['rust_analyzer'] = {
+--     on_attach = function(client, bufnr)
+--         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+--     end,
+--     settings = {
+--         ["rust-analyzer"] = {
+--             imports = {
+--                 granularity = {
+--                     group = "module",
+--                 },
+--                 prefix = "self",
+--             },
+--             cargo = {
+--                 buildScripts = {
+--                     enable = true,
+--                 },
+--             },
+--             procMacro = {
+--                 enable = true
+--             },
+--         }
+--     }
+-- }
+
+-- vim.lsp.enable('rust_analyzer')

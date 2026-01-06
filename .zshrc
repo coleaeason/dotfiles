@@ -38,8 +38,9 @@ export ANDROID_HOME="$HOME/Library/Android/sdk"
 path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")
 
 # Ubuntu keychain similar to macos keychain behavior for ssh
-eval $(keychain --eval id_ed25519)
-
+if command -v keychain 1>/dev/null 2>&1 && [[ "$(uname -s)" == "Linux" ]]; then
+    eval $(keychain --eval id_ed25519)
+fi
 # Java Tools
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 

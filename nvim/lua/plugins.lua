@@ -1,7 +1,7 @@
 return {
     -- Plugins to load with lazy.nvim
     { 
-        "catppuccin/nvim", 
+        "catppuccin/nvim",
         name = "catppuccin", 
         priority = 1000, 
         lazy = false,     
@@ -12,6 +12,9 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        -- keys = {
+        --     { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+        -- },
         config = function()
             local servers = {
                 rust_analyzer = {
@@ -39,7 +42,16 @@ return {
                     on_attach = function(client, bufnr)
                         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                     end
-            }
+            },
+            ty = {
+                settings = { },
+                on_attach = function(client, bufnr)
+                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                end,
+            },
+            ruff = {
+                settings = {}
+            },
         }
 
             -- Load all of the servers in the above servers array
@@ -51,6 +63,7 @@ return {
                 vim.lsp.config[server] = opts
                 vim.lsp.enable(server)
             end
+            vim.diagnostic.config({ virtual_text = true })
         end,
     },
     {

@@ -1,10 +1,13 @@
 # Expensify aliases
-alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
+# alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
 alias pfab='fab -P -z 100'
 alias gab='fab -g bastion1.sjc'
 alias pgab='gab -P -z 100'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias misc='cd ~/source/Expensify/misc-scripts/; source venv/bin/activate'
+alias edev='cd ~/source/Expensify/Expensidev'
+alias exp='cd ~/source/Expensify/'
+alias src='cd ~/source'
 
 # Git aliases
 alias gm='git pull origin main'
@@ -43,6 +46,12 @@ function socks(){
 # get info from a cert quickly
 function certinfo() {
     openssl x509 -in "$1" -noout -text
+}
+
+# generate a password from op
+function genpass() {
+    command -v op 2>/dev/null 1&>2 || echo "op is not installed"
+    op item create --category password --generate-password --dry-run --format json | jq -r '.fields[0].value'
 }
 
 alias tf='op run --env-file=$HOME/source/Expensify/Expensidev/Terraform/.env -- /opt/homebrew/bin/terraform'

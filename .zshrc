@@ -114,9 +114,6 @@ fi
 # Configure GAM
 export GAMCFGDIR="$HOME/.gam"
 
-# Set colors to always be like linux
-export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
-
 #Aliases
 if [ -f "$HOME"/.aliases ]; then
     source "$HOME"/.aliases
@@ -127,7 +124,10 @@ if [ -f "$HOME"/.bash_aliases ]; then
 fi
 
 if command -v nvim 1>/dev/null 2>&1; then
-    alias vim='nvim'
+    alias vim="nvim"
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
 fi
 
 # set functions path

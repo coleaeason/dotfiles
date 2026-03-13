@@ -1,7 +1,6 @@
 [core]
-    editor = vim
+	editor = nvim
     excludesfile = ~/.gitignore
-    hooksPath = ~/.git/hooks
 	pager = 
 [user]
 	name = Cole Eason
@@ -20,3 +19,7 @@
 	process = git-lfs filter-process
 [init]
 	defaultBranch = main
+	templateDir = /Users/cole/.git-template
+[alias]
+    tidy = "!git branch --merged main | grep -vw main | xargs -n 1 git branch -d && git gc"
+    branches = "for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"

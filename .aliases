@@ -1,7 +1,7 @@
 # Expensify aliases
 # alias saltfab='cd ~/source/Expensify/Expensidev/Ops-Configs/saltfab; source venv/bin/activate'
-alias pfab='fab -P -z 100'
-alias gab='fab -g bastion1.sjc'
+alias pfab='saltfab -P -z 100'
+alias gab='saltfab -g bastion1.sjc'
 alias pgab='gab -P -z 100'
 alias sshtun='ssh -At -t bastion1.sjc ssh -A'
 alias misc='cd ~/source/Expensify/misc-scripts/; source venv/bin/activate'

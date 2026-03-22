@@ -44,7 +44,15 @@ return {
                     end
             },
             ty = {
-                settings = { },
+                settings = {
+                    ty = {
+                        configuration = {
+                            rules = {
+                                ["unresolved-import"] = "ignore"
+                            }
+                        }
+                    }
+                },
                 on_attach = function(client, bufnr)
                     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                 end,
@@ -63,7 +71,7 @@ return {
                 vim.lsp.config[server] = opts
                 vim.lsp.enable(server)
             end
-            vim.diagnostic.config({ virtual_text = true })
+            vim.diagnostic.config({ virtual_lines = true })
         end,
     },
     {

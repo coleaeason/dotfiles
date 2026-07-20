@@ -92,13 +92,19 @@ fi
 if [[ -z $GPG_TTY ]] && tty -s; then
 	export GPG_TTY=$(tty)
 fi
+
+if command -v fnm 1>/dev/null 2>&1; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+[ -d "$ZSH" ] && plugins=(uv mise aws fzf fnm)
+
 # nvm Plugin settings for oh-my-zsh
 # This lazy loads the nvm plugin, so it doesn't slow down the shell startup time.
 # it will load when you first execute npm, node, etc anything that might need it.
-[ -d "$ZSH" ] && plugins=(nvm uv mise)
+# zstyle ':omz:plugins:nvm' lazy yes
+# zstyle ':omz:plugins:nvm' autoload yes
 
-zstyle ':omz:plugins:nvm' lazy yes
-zstyle ':omz:plugins:nvm' autoload yes
 zstyle ':omz:update' mode reminder
 
 # On macos this is in brew, otherwise it's in the oh-my-zsh plugins directory.

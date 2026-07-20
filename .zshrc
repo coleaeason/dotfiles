@@ -88,9 +88,6 @@ if [[ -f "$CA_CERT_PATH" ]]; then
     export REQUESTS_CA_BUNDLE="$CA_CERT_PATH"
 fi
 
-# Fixes UV with WARP
-export UV_NATIVE_TLS=1
-
 # Make GPG work in headless terminals
 if [[ -z $GPG_TTY ]] && tty -s; then
 	export GPG_TTY=$(tty)

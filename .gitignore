@@ -13,3 +13,5 @@
 
 # vscode trash
 .vscode
+
+**/.claude/settings.local.json

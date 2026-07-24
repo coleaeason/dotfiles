@@ -49,12 +49,6 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     fi
 fi
 
-# load secrets if any
-# DEPRECATED: Used 1Password env instead.
-if [[ -f "$HOME"/.secrets ]]; then
-    source "$HOME"/.secrets
-fi
-
 # load 1Password Plugins if inited
 if [[ -f "$HOME"/.config/op/plugins.sh ]]; then
     source "$HOME"/.config/op/plugins.sh

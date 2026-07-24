@@ -23,9 +23,6 @@ if command -v rbenv 1>/dev/null 2>&1; then
    path=("$HOME/.rbenv/shims" $path)
 fi
 
-# configure rust
-path=($path "$(brew --prefix rustup)/bin" "$HOME/.cargo/bin")
-
 # Android tools
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 path=($path "$ANDROID_HOME/tools" "$ANDROID_HOME/tools/bin" "$ANDROID_HOME/platform-tools")

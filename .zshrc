@@ -17,13 +17,6 @@ if command -v go 1>/dev/null 2>&1; then
 	path=($path "$(go env GOPATH)/bin/")
 fi
 
-# Pyenv garbage
-if command -v pyenv 1>/dev/null 2>&1; then
-	# eval "$(pyenv init -)"
-    # export PYENV_ROOT="$HOME/.pyenv"
-    # path=("$PYENV_ROOT/shims" $path)
-fi
-
 # rbenv garbage
 if command -v rbenv 1>/dev/null 2>&1; then
 	eval "$(rbenv init -)"

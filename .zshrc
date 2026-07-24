@@ -88,9 +88,16 @@ zstyle ':omz:update' mode reminder
 
 # On macos this is in brew, otherwise it's in the oh-my-zsh plugins directory.
 if command -v brew 1>/dev/null 2>&1; then
-    [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && plugins+=(zsh-autosuggestions)
 else
-    [ -f "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    [ -f "$ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && plugins+=(zsh-autosuggestions)
+fi
+
+# command line syntax highlighting
+if command -v brew 1>/dev/null 2>&1; then
+    [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && plugins+=(zsh-syntax-highlighting)
+else
+    [ -f "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && plugins+=(zsh-syntax-highlighting)
 fi
 
 # Configure GAM

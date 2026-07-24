@@ -41,6 +41,7 @@ fi
 
 # Oh-My-Zsh
 export ZSH="$HOME/.oh-my-zsh"
+ZSH_CUSTOM="$ZSH/custom"
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     if command -v oh-my-posh 1>/dev/null 2>&1; then

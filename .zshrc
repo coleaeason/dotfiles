@@ -205,3 +205,5 @@ source $ZSH/oh-my-zsh.sh
 # Uncomment this line and the first line in this file to profile zshrc start times.
 # zprof
 
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true

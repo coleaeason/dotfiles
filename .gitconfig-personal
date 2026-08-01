@@ -1,7 +1,6 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
-    hooksPath = ~/.git/hooks
 	pager = cat
 [user]
     name = Cole Eason

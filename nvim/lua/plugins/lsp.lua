@@ -2,12 +2,27 @@
 -- Servers are automatically installed with mason and loaded with lspconfig.
 return {
   {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
+    "mason-org/mason.nvim",
+    opts = { ensure_installed = { "sqlfluff" } },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    optional = true,
+    opts = { ensure_installed = { "sql" } },
+  },
+  {
+    "stevearc/conform.nvim",
     opts = {
-      ---@type lspconfig.options
-      servers = {
-        tailwind = {},
+      formatters = {
+        sqlfluff = {
+          prepend_args = {
+            "format",
+            "-",
+          },
+        },
+      },
+      formatters_by_ft = {
+        sql = "sqlfluff",
       },
     },
   },
